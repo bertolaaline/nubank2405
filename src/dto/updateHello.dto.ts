@@ -1,21 +1,6 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString } from "class-validator";
+import { OmitType, PartialType } from '@nestjs/mapped-types';
+import { CreateHelloDTO } from './createHello.dto';
 
-export class UpdateHelloDTO {
-  @IsString()
-  @IsOptional()
-  name?: string;
-
-  @IsNumberString()
-  @IsOptional()
-  age?: number;
-
-  @IsString()
-  @IsOptional()
-  @IsEmail()
-  email?: string;
-
-  @IsString()
-  @IsOptional()
-  address?: string;
-
-}
+export class UpdateHelloDTO extends PartialType(
+  OmitType(CreateHelloDTO, [] as const),
+) {}
